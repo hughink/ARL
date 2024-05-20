@@ -27,32 +27,22 @@ fi
 if [ ! -f /usr/local/bin/pip3.6 ]; then
   echo "install  pip3.6"
   python3.6 -m ensurepip --default-pip
-  python3.6 -m pip install --upgrade pip
-  pip3.6 --version
+  pip3.6 install --upgrade pip
 fi
 
 if ! command -v nmap &> /dev/null
 then
-    echo "install nmap-7.93-1 ..."
-    rpm -vhU https://nmap.org/dist/nmap-7.93-1.x86_64.rpm
+    echo "install nmap-7.91-1 ..."
+    rpm -vhU https://nmap.org/dist/nmap-7.91-1.x86_64.rpm
 fi
 
 
 if ! command -v nuclei &> /dev/null
 then
-  echo "install nuclei_3.2.4 ..."
-  wget https://github.com/projectdiscovery/nuclei/releases/download/v3.2.4/nuclei_3.2.4_linux_amd64.zip
-  unzip nuclei_3.2.4_linux_amd64.zip && mv nuclei /usr/bin/ && rm -f nuclei_3.2.4_linux_amd64.zip
-  nuclei -ut
-fi
-
-
-if ! command -v wih &> /dev/null
-then
-  echo "install wih ..."
-  ## 安装 WIH
-  wget https://github.com/1c3z/arl_files/raw/master/wih/wih_linux_amd64 -O /usr/bin/wih && chmod +x /usr/bin/wih
-  wih --version
+  echo "install nuclei_2.9.4 ..."
+  wget https://github.com/projectdiscovery/nuclei/releases/download/v2.9.4/nuclei_2.9.4_linux_amd64.zip
+  unzip nuclei_2.9.4_linux_amd64.zip && mv nuclei /usr/bin/ && rm -f nuclei_2.9.4_linux_amd64.zip
+  nuclei
 fi
 
 
@@ -65,12 +55,12 @@ systemctl start rabbitmq-server
 
 if [ ! -d ARL ]; then
   echo "git clone ARL proj"
-  git clone https://github.com/TophantTechnology/ARL
+  git clone https://github.com/Aabyss-Team/ARL
 fi
 
 if [ ! -d "ARL-NPoC" ]; then
   echo "git clone ARL-NPoC proj"
-  git clone https://github.com/1c3z/ARL-NPoC
+  git clone https://github.com/Aabyss-Team/ARL-NPoC
 fi
 
 cd ARL-NPoC
@@ -81,14 +71,14 @@ cd ../
 
 if [ ! -f /usr/local/bin/ncrack ]; then
   echo "Download ncrack ..."
-  wget https://github.com/1c3z/arl_files/raw/master/ncrack -O /usr/local/bin/ncrack
+  wget https://raw.githubusercontent.com/Aabyss-Team/arl_files/master/ncrack -O /usr/local/bin/ncrack
   chmod +x /usr/local/bin/ncrack
 fi
 
 mkdir -p /usr/local/share/ncrack
 if [ ! -f /usr/local/share/ncrack/ncrack-services ]; then
   echo "Download ncrack-services ..."
-  wget https://github.com/1c3z/arl_files/raw/master/ncrack-services -O /usr/local/share/ncrack/ncrack-services
+  wget https://raw.githubusercontent.com/Aabyss-Team/arl_files/master/ncrack-services -O /usr/local/share/ncrack/ncrack-services
 fi
 
 mkdir -p /data/GeoLite2
